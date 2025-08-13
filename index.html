@@ -3,428 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação da Plataforma Konclui</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 50%, #1e40af 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #1d4ed8, #2563eb);
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: white;
-            padding: 50px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.1; transform: scale(1.1); }
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .header h1 {
-            font-size: 2.8em;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .header .subtitle {
-            font-size: 1.2em;
-            opacity: 0.95;
-            margin-bottom: 10px;
-        }
-        
-        .header .description {
-            font-size: 1em;
-            opacity: 0.8;
-        }
-        
-        .form-content {
-            padding: 50px 40px;
-        }
-        
-        .form-section {
-            margin-bottom: 40px;
-            padding: 30px;
-            border-radius: 16px;
-            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
-            border: 1px solid #e2e8f0;
-        }
-        
-        .form-section h3 {
-            color: #1e40af;
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: #374151;
-            font-size: 1.1em;
-        }
-        
-        .user-type-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 15px 0 25px 0;
-        }
-        
-        .user-type-option {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .user-type-option input[type="radio"] {
-            opacity: 0;
-            position: absolute;
-        }
-        
-        .user-type-card {
-            padding: 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            background: white;
-        }
-        
-        .user-type-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.1);
-        }
-        
-        .user-type-option input[type="radio"]:checked + .user-type-card {
-            border-color: #3b82f6;
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            color: #1e40af;
-        }
-        
-        .user-type-card .icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .user-type-card .title {
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-        
-        .user-type-card .description {
-            font-size: 0.9em;
-            opacity: 0.7;
-        }
-        
-        .rating-container {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin: 15px 0;
-            flex-wrap: wrap;
-        }
-        
-        .star-rating {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .star {
-            font-size: 35px;
-            color: #d1d5db;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-        }
-        
-        .star:hover,
-        .star.active {
-            color: #fbbf24;
-            transform: scale(1.15);
-        }
-        
-        .rating-text {
-            margin-left: 10px;
-            font-weight: 600;
-            color: #6b7280;
-            font-size: 1.1em;
-        }
-        
-        .emoji-scale {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .emoji-option {
-            text-align: center;
-            cursor: pointer;
-            padding: 15px 10px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            border: 2px solid #e2e8f0;
-            background: white;
-        }
-        
-        .emoji-option:hover {
-            border-color: #3b82f6;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
-        }
-        
-        .emoji-option.selected {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: white;
-            border-color: #1d4ed8;
-        }
-        
-        .emoji {
-            font-size: 2.2em;
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .emoji-text {
-            font-size: 0.85em;
-            font-weight: 500;
-        }
-        
-        input[type="text"], 
-        input[type="email"], 
-        textarea, 
-        select {
-            width: 100%;
-            padding: 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            background: white;
-        }
-        
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-            transform: translateY(-1px);
-        }
-        
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            border-radius: 10px;
-            transition: background-color 0.2s ease;
-        }
-        
-        .checkbox-item:hover {
-            background: rgba(59, 130, 246, 0.05);
-        }
-        
-        .checkbox-item input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: #3b82f6;
-        }
-        
-        .checkbox-item label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: white;
-            border: none;
-            padding: 18px 50px;
-            font-size: 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
-        }
-        
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-        
-        .success-message {
-            display: none;
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            color: #065f46;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 20px;
-            border: 2px solid #10b981;
-            font-weight: 600;
-        }
-        
-        @media (max-width: 768px) {
-            .user-type-selector {
-                grid-template-columns: 1fr;
-            }
-            
-            .emoji-scale {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .checkbox-group {
-                grid-template-columns: 1fr;
-            }
-            
-            .header {
-                padding: 30px 20px;
-            }
-            
-            .form-content {
-                padding: 30px 20px;
-            }
-            
-            .form-section {
-                padding: 20px;
-            }
-        }
-    </style>
+    <title>Avaliação da Plataforma Koncluí</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="header-content">
-                <h1>📊 Konklui</h1>
+                <h1>📊 Koncluí</h1>
                 <p class="subtitle">Pesquisa de Satisfação</p>
                 <p class="description">Sua opinião é fundamental para continuarmos evoluindo nossa plataforma de gestão para restaurantes</p>
             </div>
         </div>
         
         <div class="form-content">
-            <form id="feedbackForm">
+            <form id="feedbackForm" novalidate>
                 <div class="form-section">
                     <h3>🔍 Informações Básicas</h3>
                     
                     <div class="form-group">
-                        <label>Qual é o seu perfil na plataforma Konklui?</label>
+                        <label>Qual é o seu perfil na plataforma Konklui? <span class="required">*</span></label>
                         <div class="user-type-selector">
                             <div class="user-type-option">
-                                <input type="radio" id="gestor" name="userType" value="gestor">
-                                <label for="gestor" class="user-type-card">
-                                    <span class="icon">👨‍💼</span>
-                                    <div class="title">Gestor/Proprietário</div>
+                                <input type="radio" id="gestor" name="userType" value="Gestor/Proprietário" required>
+                                <div class="user-type-card" onclick="selectUserType('gestor')">
+                                    <span class="icon">👩‍💼👨‍💼</span>
+                                    <div class="title">Gestor/Gerente</div>
                                     <div class="description">Configuro checklists, usuários e unidades</div>
-                                </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="name">Nome:</label>
-                        <input type="text" id="name" name="name" placeholder="Seu nome">
+                        <label for="name">Nome: <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="restaurant">Nome do Restaurante (opcional):</label>
+                        <label for="restaurant">Nome do Restaurante:</label>
                         <input type="text" id="restaurant" name="restaurant" placeholder="Nome do seu restaurante">
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">Email para contato (opcional):</label>
+                        <label for="email">Email para contato:</label>
                         <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com">
                     </div>
                 </div>
@@ -433,7 +55,7 @@
                     <h3>⭐ Avaliação Geral</h3>
                     
                     <div class="form-group">
-                        <label>Como você avalia a plataforma Konklui no geral?</label>
+                        <label>Como você avalia a plataforma Konklui no geral? <span class="required">*</span></label>
                         <div class="rating-container">
                             <div class="star-rating" id="overallRating">
                                 <span class="star" data-rating="1">⭐</span>
@@ -444,10 +66,11 @@
                             </div>
                             <span class="rating-text" id="ratingText">Clique nas estrelas</span>
                         </div>
+                        <input type="hidden" name="avaliacao_geral" id="ratingValue" required>
                     </div>
                     
                     <div class="form-group">
-                        <label>Quão fácil é usar o Konclui no seu dia a dia?</label>
+                        <label>Quão fácil é usar o Konklui no seu dia a dia? <span class="required">*</span></label>
                         <div class="emoji-scale" id="usabilityScale">
                             <div class="emoji-option" data-value="1">
                                 <span class="emoji">😫</span>
@@ -470,6 +93,7 @@
                                 <div class="emoji-text">Muito Fácil</div>
                             </div>
                         </div>
+                        <input type="hidden" name="facilidade_uso" id="usabilityValue" required>
                     </div>
                 </div>
 
@@ -480,31 +104,31 @@
                         <label>Quais funcionalidades você mais utiliza? (marque todas que se aplicam)</label>
                         <div class="checkbox-group">
                             <div class="checkbox-item">
-                                <input type="checkbox" id="checklist-creation" name="features" value="checklist-creation">
+                                <input type="checkbox" id="checklist-creation" name="features" value="Criação de Checklists">
                                 <label for="checklist-creation">Criação de Checklists</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="user-management" name="features" value="user-management">
-                                <label for="user-management">Painel-Dashboard</label>
+                                <input type="checkbox" id="dashboard" name="features" value="Painel Dashboard">
+                                <label for="dashboard">Painel Dashboard</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="user-management" name="features" value="user-management">
+                                <input type="checkbox" id="user-management" name="features" value="Gestão de Usuários">
                                 <label for="user-management">Gestão de Usuários</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="unit-management" name="features" value="unit-management">
+                                <input type="checkbox" id="unit-management" name="features" value="Gestão de Unidades">
                                 <label for="unit-management">Gestão de Unidades</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="sector-management" name="features" value="sector-management">
+                                <input type="checkbox" id="sector-management" name="features" value="Gestão de Setores">
                                 <label for="sector-management">Gestão de Setores</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="reports" name="features" value="reports">
-                                <label for="reports">Conferir respostas do Checklist</label>
+                                <input type="checkbox" id="checklist-answers" name="features" value="Conferir respostas do Checklist">
+                                <label for="checklist-answers">Conferir respostas do Checklist</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="notifications" name="features" value="notifications">
+                                <input type="checkbox" id="notifications" name="features" value="Notificações">
                                 <label for="notifications">Notificações</label>
                             </div>
                         </div>
@@ -537,11 +161,11 @@
                         <label for="recommendation">Você recomendaria o Konklui para outros restaurantes?</label>
                         <select id="recommendation" name="recommendation">
                             <option value="">Selecione uma opção</option>
-                            <option value="definitely">Definitivamente sim</option>
-                            <option value="probably">Provavelmente sim</option>
-                            <option value="maybe">Talvez</option>
-                            <option value="probably_not">Provavelmente não</option>
-                            <option value="definitely_not">Definitivamente não</option>
+                            <option value="Definitivamente sim">Definitivamente sim</option>
+                            <option value="Provavelmente sim">Provavelmente sim</option>
+                            <option value="Talvez">Talvez</option>
+                            <option value="Provavelmente não">Provavelmente não</option>
+                            <option value="Definitivamente não">Definitivamente não</option>
                         </select>
                     </div>
                     
@@ -551,10 +175,14 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="submit-btn">Enviar Avaliação</button>
+                <button type="submit" class="submit-btn" id="submitBtn">Enviar Avaliação</button>
                 
                 <div class="success-message" id="successMessage">
                     ✅ Obrigado pelo seu feedback! Sua opinião nos ajuda a melhorar o Konklui continuamente.
+                </div>
+
+                <div class="error-message" id="errorMessage">
+                    ❌ Por favor, preencha todos os campos obrigatórios marcados com *.
                 </div>
             </form>
         </div>
@@ -563,9 +191,16 @@
     <script>
         const FORMSPREE_URL = 'https://formspree.io/f/mnnzrqqn';
         
-        // ===== FUNCIONALIDADES DO FORMULÁRIO =====
+        // ===== ELEMENTOS DO DOM =====
+        const form = document.getElementById('feedbackForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // ===== AVALIAÇÃO POR ESTRELAS =====
         const stars = document.querySelectorAll('.star');
         const ratingText = document.getElementById('ratingText');
+        const ratingValue = document.getElementById('ratingValue');
         const ratingLabels = ['Péssimo', 'Ruim', 'Regular', 'Bom', 'Excelente'];
         
         let currentRating = 0;
@@ -575,6 +210,7 @@
                 currentRating = index + 1;
                 updateStarRating();
                 ratingText.textContent = ratingLabels[index];
+                ratingValue.value = `${currentRating} estrelas (${ratingLabels[index]})`;
             });
             
             star.addEventListener('mouseover', () => {
@@ -595,44 +231,112 @@
         function updateStarRating() {
             highlightStars(currentRating);
         }
+        
+        // ===== ESCALA DE EMOJIS =====
         const emojiOptions = document.querySelectorAll('.emoji-option');
+        const usabilityValue = document.getElementById('usabilityValue');
         
         emojiOptions.forEach(option => {
             option.addEventListener('click', () => {
                 emojiOptions.forEach(opt => opt.classList.remove('selected'));
                 option.classList.add('selected');
+                
+                const value = option.getAttribute('data-value');
+                const text = option.querySelector('.emoji-text').textContent;
+                usabilityValue.value = `${value} - ${text}`;
             });
         });
         
-        document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const submitBtn = document.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            
+        // ===== SELEÇÃO DO TIPO DE USUÁRIO =====
+        function selectUserType(id) {
+            document.getElementById(id).checked = true;
+        }
         
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.disabled = true;
+        // ===== VALIDAÇÃO DO FORMULÁRIO =====
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = form.querySelectorAll('input[required], select[required]');
             
+            // Limpar erros anteriores
+            errorMessage.style.display = 'none';
+            form.querySelectorAll('.field-error').forEach(field => {
+                field.classList.remove('field-error');
+            });
             
-            const formData = new FormData(e.target);
-            
-            // Add rating data
-            const ratingLabels = ['Péssimo', 'Ruim', 'Regular', 'Bom', 'Excelente'];
-            formData.append('avaliacao_geral', currentRating > 0 ? 
-                `${currentRating} estrelas (${ratingLabels[currentRating - 1]})` : 'Não avaliado');
-            
-            
-            const selectedUsability = document.querySelector('.emoji-option.selected');
-            if (selectedUsability) {
-                formData.append('facilidade_uso', 
-                    `${selectedUsability.getAttribute('data-value')} - ${selectedUsability.querySelector('.emoji-text').textContent}`);
+            // Verificar campos obrigatórios
+            requiredFields.forEach(field => {
+                if (field.type === 'radio') {
+                    const radioGroup = form.querySelectorAll(`input[name="${field.name}"]`);
+                    const hasSelection = Array.from(radioGroup).some(radio => radio.checked);
+                    if (!hasSelection) {
+                        isValid = false;
+                        // Destacar o card do tipo de usuário
+                        document.querySelector('.user-type-card').style.borderColor = '#ef4444';
+                    }
+                } else if (field.type === 'hidden') {
+                    // Verificar campos hidden (avaliações)
+                    if (!field.value.trim()) {
+                        isValid = false;
+                    }
+                } else if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('field-error');
+                }
+            });
+
+            // Verificar formato do email se preenchido
+            const emailField = document.getElementById('email');
+            if (emailField.value && !isValidEmail(emailField.value)) {
+                isValid = false;
+                emailField.classList.add('field-error');
             }
             
-          
-            formData.append('data_envio', new Date().toLocaleString('pt-BR'));
+            if (!isValid) {
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // ===== COLETA DE FUNCIONALIDADES SELECIONADAS =====
+        function getSelectedFeatures() {
+            const checkedBoxes = form.querySelectorAll('input[name="features"]:checked');
+            return Array.from(checkedBoxes).map(checkbox => checkbox.value).join(', ');
+        }
+        
+        // ===== ENVIO DO FORMULÁRIO =====
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const originalText = submitBtn.textContent;
+            
+            // Estado de carregamento
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+            form.classList.add('loading');
             
             try {
+                // Preparar dados do formulário
+                const formData = new FormData(form);
+                
+                // Adicionar funcionalidades selecionadas
+                const selectedFeatures = getSelectedFeatures();
+                formData.append('funcionalidades_utilizadas', selectedFeatures || 'Nenhuma selecionada');
+                
+                // Adicionar data de envio
+                formData.append('data_envio', new Date().toLocaleString('pt-BR'));
+                
+                // Enviar para Formspree
                 const response = await fetch(FORMSPREE_URL, {
                     method: 'POST',
                     body: formData,
@@ -642,40 +346,48 @@
                 });
                 
                 if (response.ok) {
-                    // Show success message
-                    document.getElementById('successMessage').style.display = 'block';
-                    document.getElementById('successMessage').scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
+                    // Sucesso - mostrar mensagem
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
                     
-                    // Reset form
-                    document.getElementById('feedbackForm').reset();
+                    // Resetar formulário
+                    form.reset();
                     currentRating = 0;
                     updateStarRating();
                     ratingText.textContent = 'Clique nas estrelas';
+                    ratingValue.value = '';
+                    usabilityValue.value = '';
                     emojiOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Remover destaque do card
+                    document.querySelector('.user-type-card').style.borderColor = '#e2e8f0';
+                    
                 } else {
-                    throw new Error('Erro no envio');
+                    const data = await response.json();
+                    throw new Error(data.error || 'Erro no envio');
                 }
                 
             } catch (error) {
-                console.log('Erro:', error);
+                console.error('Erro:', error);
                 alert('Erro ao enviar feedback. Por favor, tente novamente.');
+                
             } finally {
-                // Restore button state
+                // Restaurar estado do botão
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
+                form.classList.remove('loading');
             }
         });
         
-        // Add some interactive animations
+        // ===== ANIMAÇÕES E INTERAÇÕES =====
+        
+        // Animação de entrada das seções
         const formSections = document.querySelectorAll('.form-section');
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, {
@@ -684,11 +396,186 @@
         });
         
         formSections.forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
         });
+        
+        // Limpar erros ao digitar
+        const inputs = form.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('field-error');
+                if (input.closest('.user-type-option')) {
+                    document.querySelector('.user-type-card').style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+        
+        // Auto-salvar rascunho (opcional - usando sessionStorage para não persistir entre sessões)
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Salvar dados básicos
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    // Se já existe, converter para array (para checkboxes múltiplos)
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Salvar estados especiais
+            data.currentRating = currentRating;
+            data.selectedUsability = document.querySelector('.emoji-option.selected')?.getAttribute('data-value');
+            
+            sessionStorage.setItem('konklui_feedback_draft', JSON.stringify(data));
+        }
+        
+        function loadFormData() {
+            const savedData = sessionStorage.getItem('konklui_feedback_draft');
+            if (!savedData) return;
+            
+            try {
+                const data = JSON.parse(savedData);
+                
+                // Restaurar campos básicos
+                Object.keys(data).forEach(key => {
+                    if (key === 'currentRating') {
+                        if (data[key] && data[key] > 0) {
+                            currentRating = parseInt(data[key]);
+                            updateStarRating();
+                            ratingText.textContent = ratingLabels[currentRating - 1];
+                            ratingValue.value = `${currentRating} estrelas (${ratingLabels[currentRating - 1]})`;
+                        }
+                    } else if (key === 'selectedUsability') {
+                        if (data[key]) {
+                            const emojiOption = document.querySelector(`[data-value="${data[key]}"]`);
+                            if (emojiOption) {
+                                emojiOption.classList.add('selected');
+                                const text = emojiOption.querySelector('.emoji-text').textContent;
+                                usabilityValue.value = `${data[key]} - ${text}`;
+                            }
+                        }
+                    } else {
+                        const field = form.querySelector(`[name="${key}"]`);
+                        if (field) {
+                            if (field.type === 'radio') {
+                                if (field.value === data[key]) {
+                                    field.checked = true;
+                                }
+                            } else if (field.type === 'checkbox') {
+                                const values = Array.isArray(data[key]) ? data[key] : [data[key]];
+                                if (values.includes(field.value)) {
+                                    field.checked = true;
+                                }
+                            } else if (field.type !== 'hidden') {
+                                field.value = data[key];
+                            }
+                        }
+                    }
+                });
+                
+            } catch (e) {
+                console.log('Erro ao carregar rascunho:', e);
+            }
+        }
+        
+        // Salvar automaticamente a cada mudança
+        inputs.forEach(input => {
+            input.addEventListener('change', saveFormData);
+        });
+        
+        // Salvar ao clicar nas estrelas e emojis
+        stars.forEach(star => {
+            star.addEventListener('click', saveFormData);
+        });
+        
+        emojiOptions.forEach(option => {
+            option.addEventListener('click', saveFormData);
+        });
+        
+        // Carregar dados salvos ao inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFormData();
+            
+            // Auto-selecionar o tipo de usuário já que só há uma opção
+            document.getElementById('gestor').checked = true;
+        });
+        
+        // Limpar rascunho após envio bem-sucedido
+        form.addEventListener('submit', (e) => {
+            if (e.defaultPrevented) return;
+            
+            // Aguardar um pouco antes de limpar para garantir que o envio foi processado
+            setTimeout(() => {
+                sessionStorage.removeItem('konklui_feedback_draft');
+            }, 2000);
+        });
+        
+        // ===== MELHORIAS DE UX =====
+        
+        // Feedback visual ao passar o mouse nas estrelas
+        stars.forEach((star, index) => {
+            star.addEventListener('mouseenter', () => {
+                ratingText.textContent = ratingLabels[index];
+            });
+        });
+        
+        document.getElementById('overallRating').addEventListener('mouseleave', () => {
+            if (currentRating > 0) {
+                ratingText.textContent = ratingLabels[currentRating - 1];
+            } else {
+                ratingText.textContent = 'Clique nas estrelas';
+            }
+        });
+        
+        // Contador de caracteres para textareas (opcional)
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', () => {
+                const length = textarea.value.length;
+                if (length > 500) {
+                    textarea.style.borderColor = '#f59e0b';
+                } else {
+                    textarea.style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+        
+        // Validação em tempo real do email
+        const emailField = document.getElementById('email');
+        emailField.addEventListener('blur', () => {
+            if (emailField.value && !isValidEmail(emailField.value)) {
+                emailField.classList.add('field-error');
+            }
+        });
+        
+        emailField.addEventListener('input', () => {
+            emailField.classList.remove('field-error');
+        });
+        
+        // Prevenção de envio duplo
+        let isSubmitting = false;
+        
+        form.addEventListener('submit', (e) => {
+            if (isSubmitting) {
+                e.preventDefault();
+                return false;
+            }
+            isSubmitting = true;
+            
+            // Reset após 5 segundos como segurança
+            setTimeout(() => {
+                isSubmitting = false;
+            }, 5000);
+        });
+        
+        console.log('Formulário Konklui inicializado com sucesso!');
     </script>
 </body>
 </html>
