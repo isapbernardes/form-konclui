@@ -410,19 +410,11 @@
                                     <div class="description">Configuro checklists, usuários e unidades</div>
                                 </label>
                             </div>
-                            <div class="user-type-option">
-                                <input type="radio" id="operador" name="userType" value="operador">
-                                <label for="operador" class="user-type-card">
-                                    <span class="icon">👨‍🍳</span>
-                                    <div class="title">Operador</div>
-                                    <div class="description">Executo os checklists no dia a dia</div>
-                                </label>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="name">Nome (opcional):</label>
+                        <label for="name">Nome:</label>
                         <input type="text" id="name" name="name" placeholder="Seu nome">
                     </div>
                     
@@ -492,8 +484,8 @@
                                 <label for="checklist-creation">Criação de Checklists</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="checklist-execution" name="features" value="checklist-execution">
-                                <label for="checklist-execution">Execução de Checklists</label>
+                                <input type="checkbox" id="user-management" name="features" value="user-management">
+                                <label for="user-management">Painel-Dashboard</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="user-management" name="features" value="user-management">
@@ -509,11 +501,7 @@
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="reports" name="features" value="reports">
-                                <label for="reports">Relatórios</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="mobile-app" name="features" value="mobile-app">
-                                <label for="mobile-app">Aplicativo Mobile</label>
+                                <label for="reports">Respostas do Checklist</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="notifications" name="features" value="notifications">
@@ -573,11 +561,9 @@
     </div>
 
     <script>
-        // ===== FORMSPREE - CONFIGURAÇÃO SIMPLES =====
         const FORMSPREE_URL = 'https://formspree.io/f/mnnzrqqn';
         
         // ===== FUNCIONALIDADES DO FORMULÁRIO =====
-        // Star rating functionality
         const stars = document.querySelectorAll('.star');
         const ratingText = document.getElementById('ratingText');
         const ratingLabels = ['Péssimo', 'Ruim', 'Regular', 'Bom', 'Excelente'];
@@ -609,8 +595,6 @@
         function updateStarRating() {
             highlightStars(currentRating);
         }
-        
-        // Emoji scale functionality
         const emojiOptions = document.querySelectorAll('.emoji-option');
         
         emojiOptions.forEach(option => {
@@ -620,18 +604,17 @@
             });
         });
         
-        // Form submission with Formspree
         document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const submitBtn = document.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             
-            // Show loading state
+        
             submitBtn.textContent = 'Enviando...';
             submitBtn.disabled = true;
             
-            // Collect all form data
+            
             const formData = new FormData(e.target);
             
             // Add rating data
@@ -639,14 +622,14 @@
             formData.append('avaliacao_geral', currentRating > 0 ? 
                 `${currentRating} estrelas (${ratingLabels[currentRating - 1]})` : 'Não avaliado');
             
-            // Add usability rating
+            
             const selectedUsability = document.querySelector('.emoji-option.selected');
             if (selectedUsability) {
                 formData.append('facilidade_uso', 
                     `${selectedUsability.getAttribute('data-value')} - ${selectedUsability.querySelector('.emoji-text').textContent}`);
             }
             
-            // Add current date
+          
             formData.append('data_envio', new Date().toLocaleString('pt-BR'));
             
             try {
