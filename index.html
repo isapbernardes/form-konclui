@@ -22,7 +22,7 @@
                     <h3>🔍 Informações Básicas</h3>
                     
                     <div class="form-group">
-                        <label>Qual é o seu perfil na plataforma Konklui? <span class="required">*</span></label>
+                        <label>Qual é o seu perfil na plataforma Koncluí? <span class="required">*</span></label>
                         <div class="user-type-selector">
                             <div class="user-type-option">
                                 <input type="radio" id="gestor" name="userType" value="Gestor/Proprietário" required>
@@ -55,7 +55,7 @@
                     <h3>⭐ Avaliação Geral</h3>
                     
                     <div class="form-group">
-                        <label>Como você avalia a plataforma Konklui no geral? <span class="required">*</span></label>
+                        <label>Como você avalia a plataforma Koncluí no geral? <span class="required">*</span></label>
                         <div class="rating-container">
                             <div class="star-rating" id="overallRating">
                                 <span class="star" data-rating="1">⭐</span>
@@ -70,7 +70,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Quão fácil é usar o Konklui no seu dia a dia? <span class="required">*</span></label>
+                        <label>Quão fácil é usar o Koncluí no seu dia a dia? <span class="required">*</span></label>
                         <div class="emoji-scale" id="usabilityScale">
                             <div class="emoji-option" data-value="1">
                                 <span class="emoji">😫</span>
@@ -139,7 +139,7 @@
                     <h3>💭 Feedback Detalhado</h3>
                     
                     <div class="form-group">
-                        <label for="mostLiked">O que você mais gosta no Konklui?</label>
+                        <label for="mostLiked">O que você mais gosta no Koncluí?</label>
                         <textarea id="mostLiked" name="mostLiked" placeholder="Conte-nos o que funciona bem e facilita seu trabalho no restaurante..."></textarea>
                     </div>
                     
@@ -149,7 +149,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="timeImpact">Como o Konklui impactou a gestão do seu restaurante?</label>
+                        <label for="timeImpact">Como o Koncluí impactou a gestão do seu restaurante?</label>
                         <textarea id="timeImpact" name="timeImpact" placeholder="Por exemplo: economizou tempo, melhorou a organização, facilitou o controle de qualidade..."></textarea>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                     <h3>🎯 Recomendação</h3>
                     
                     <div class="form-group">
-                        <label for="recommendation">Você recomendaria o Konklui para outros restaurantes?</label>
+                        <label for="recommendation">Você recomendaria o Koncluí para outros restaurantes?</label>
                         <select id="recommendation" name="recommendation">
                             <option value="">Selecione uma opção</option>
                             <option value="Definitivamente sim">Definitivamente sim</option>
@@ -171,14 +171,14 @@
                     
                     <div class="form-group">
                         <label for="additionalComments">Comentários adicionais:</label>
-                        <textarea id="additionalComments" name="additionalComments" placeholder="Qualquer outra observação sobre sua experiência com o Konklui..."></textarea>
+                        <textarea id="additionalComments" name="additionalComments" placeholder="Qualquer outra observação sobre sua experiência com o Koncluí..."></textarea>
                     </div>
                 </div>
                 
                 <button type="submit" class="submit-btn" id="submitBtn">Enviar Avaliação</button>
                 
                 <div class="success-message" id="successMessage">
-                    ✅ Obrigado pelo seu feedback! Sua opinião nos ajuda a melhorar o Konklui continuamente.
+                    ✅ Obrigado pelo seu feedback! Sua opinião nos ajuda a melhorar o Koncluí continuamente.
                 </div>
 
                 <div class="error-message" id="errorMessage">
@@ -433,11 +433,11 @@
             data.currentRating = currentRating;
             data.selectedUsability = document.querySelector('.emoji-option.selected')?.getAttribute('data-value');
             
-            sessionStorage.setItem('konklui_feedback_draft', JSON.stringify(data));
+            sessionStorage.setItem('Koncluí_feedback_draft', JSON.stringify(data));
         }
         
         function loadFormData() {
-            const savedData = sessionStorage.getItem('konklui_feedback_draft');
+            const savedData = sessionStorage.getItem('Koncluí_feedback_draft');
             if (!savedData) return;
             
             try {
@@ -513,7 +513,7 @@
             
             // Aguardar um pouco antes de limpar para garantir que o envio foi processado
             setTimeout(() => {
-                sessionStorage.removeItem('konklui_feedback_draft');
+                sessionStorage.removeItem('Koncluí_feedback_draft');
             }, 2000);
         });
         
@@ -575,7 +575,7 @@
             }, 5000);
         });
         
-        console.log('Formulário Konklui inicializado com sucesso!');
+        console.log('Formulário Koncluí inicializado com sucesso!');
     </script>
 </body>
 </html>
